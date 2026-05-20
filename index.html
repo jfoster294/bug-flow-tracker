@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Remote Job Application Tracker | Joel Foster</title>
+  <title>BugFlow Tracker | Joel Foster</title>
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -13,18 +13,18 @@
     <section class="hero">
       <div class="top-bar">
         <div>
-          <p class="eyebrow">Remote Job Tracker</p>
-          <h1>Track Remote Applications</h1>
-          <p>Add remote jobs, track application status, filter your list, and save everything in your browser.</p>
+          <p class="eyebrow">BugFlow Tracker</p>
+          <h1>Track Bugs and Issues</h1>
+          <p>Log bugs, assign priority, update status, filter issues, and save everything locally.</p>
         </div>
 
         <div class="theme-control">
           <label for="themeSelect">Theme</label>
           <select id="themeSelect">
             <option value="clean">Clean Dashboard</option>
-            <option value="terminal">Career Terminal</option>
+            <option value="terminal">Dev Terminal</option>
             <option value="focus">Focus Mode</option>
-            <option value="corporate">Corporate Blue</option>
+            <option value="cyber">Cyber Debug</option>
             <option value="warm">Warm Desk</option>
           </select>
         </div>
@@ -33,85 +33,100 @@
 
     <section class="stats-grid">
       <div class="stat-card">
-        <p>Total</p>
+        <p>Total Issues</p>
         <h2 id="totalCount">0</h2>
       </div>
 
       <div class="stat-card">
-        <p>Applied</p>
-        <h2 id="appliedCount">0</h2>
+        <p>Open</p>
+        <h2 id="openCount">0</h2>
       </div>
 
       <div class="stat-card">
-        <p>Interviews</p>
-        <h2 id="interviewCount">0</h2>
+        <p>In Progress</p>
+        <h2 id="progressCount">0</h2>
       </div>
 
       <div class="stat-card">
-        <p>Offers</p>
-        <h2 id="offerCount">0</h2>
+        <p>Fixed</p>
+        <h2 id="fixedCount">0</h2>
       </div>
     </section>
 
     <section class="tracker-layout">
-      <form id="jobForm" class="job-form">
-        <h2>Add Application</h2>
+      <form id="bugForm" class="bug-form">
+        <h2>Add Issue</h2>
 
-        <label for="companyInput">Company</label>
-        <input type="text" id="companyInput" placeholder="Example: Google" required />
+        <label for="projectInput">Project Name</label>
+        <input type="text" id="projectInput" placeholder="Example: Movie Search App" required />
 
-        <label for="titleInput">Job Title</label>
-        <input type="text" id="titleInput" placeholder="Example: Front End Developer" required />
+        <label for="titleInput">Issue Title</label>
+        <input type="text" id="titleInput" placeholder="Example: Search button not working" required />
 
-        <label for="linkInput">Job Link</label>
-        <input type="url" id="linkInput" placeholder="https://example.com/job" />
+        <label for="priorityInput">Priority</label>
+        <select id="priorityInput">
+          <option value="Low">Low</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="High">High</option>
+          <option value="Critical">Critical</option>
+        </select>
 
         <label for="statusInput">Status</label>
         <select id="statusInput">
-          <option value="Saved">Saved</option>
-          <option value="Applied">Applied</option>
-          <option value="Interview">Interview</option>
-          <option value="Offer">Offer</option>
-          <option value="Rejected">Rejected</option>
+          <option value="Backlog">Backlog</option>
+          <option value="Open" selected>Open</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Testing">Testing</option>
+          <option value="Fixed">Fixed</option>
+          <option value="Closed">Closed</option>
         </select>
 
-        <label for="dateInput">Date Applied</label>
+        <label for="dateInput">Date Found</label>
         <input type="date" id="dateInput" />
 
         <label for="notesInput">Notes</label>
-        <textarea id="notesInput" placeholder="Example: Remote role, React preferred, follow up next week"></textarea>
+        <textarea id="notesInput" placeholder="Example: Happens after clicking search with an empty input. Need to validate form."></textarea>
 
-        <button type="submit">Add Job</button>
+        <button type="submit">Add Issue</button>
       </form>
 
-      <section class="applications-panel">
+      <section class="issues-panel">
         <div class="panel-header">
           <div>
-            <h2>Applications</h2>
-            <p id="listMessage">No applications yet.</p>
+            <h2>Issues</h2>
+            <p id="listMessage">No issues yet.</p>
           </div>
 
           <button id="clearAllButton" class="danger-button" type="button">Clear All</button>
         </div>
 
         <div class="filters">
-          <input type="text" id="searchInput" placeholder="Search company or title" />
+          <input type="text" id="searchInput" placeholder="Search project or issue" />
 
           <select id="filterStatus">
             <option value="All">All Statuses</option>
-            <option value="Saved">Saved</option>
-            <option value="Applied">Applied</option>
-            <option value="Interview">Interview</option>
-            <option value="Offer">Offer</option>
-            <option value="Rejected">Rejected</option>
+            <option value="Backlog">Backlog</option>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Testing">Testing</option>
+            <option value="Fixed">Fixed</option>
+            <option value="Closed">Closed</option>
+          </select>
+
+          <select id="filterPriority">
+            <option value="All">All Priorities</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
           </select>
         </div>
 
-        <div id="applicationsList" class="applications-list"></div>
+        <div id="issuesList" class="issues-list"></div>
 
         <div id="emptyState" class="empty-state">
-          <h3>No jobs found</h3>
-          <p>Add your first remote job application or adjust your filters.</p>
+          <h3>No issues found</h3>
+          <p>Add your first bug or adjust your filters.</p>
         </div>
       </section>
     </section>
