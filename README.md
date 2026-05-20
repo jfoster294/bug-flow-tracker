@@ -1,35 +1,37 @@
-# Remote Job Application Tracker
+# BugFlow Tracker
 
-A front-end app where users can track remote job applications, update statuses, filter applications, and save data with local storage.
+A front-end bug tracker where users can log issues, assign priority, update status, filter bugs, and save everything locally.
 
 ## Live Demo
 
-Coming soon
+https://jfoster294.github.io/bug-flow-tracker/
 
 ## Features
 
-- Add remote job applications
-- Track company name
-- Track job title
-- Save job links
-- Track application status
-- Track date applied
+- Add bugs and issues
+- Track project name
+- Track issue title
+- Assign priority
+- Update issue status
+- Track date found
 - Add notes
-- Filter applications by status
-- Search applications by company or title
-- Update job status
-- Delete applications
-- Clear all applications
-- Save applications with local storage
+- Search issues by project or title
+- Filter issues by status
+- Filter issues by priority
+- Update status from the issue card
+- Update priority from the issue card
+- Delete issues
+- Clear all issues
+- Save issues with local storage
 - Theme selector with saved theme preference
 - Responsive design for mobile and desktop
 
 ## Theme Options
 
 - Clean Dashboard
-- Career Terminal
+- Dev Terminal
 - Focus Mode
-- Corporate Blue
+- Cyber Debug
 - Warm Desk
 
 ## Built With
