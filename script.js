@@ -4,6 +4,8 @@ const titleInput = document.getElementById("titleInput");
 const priorityInput = document.getElementById("priorityInput");
 const statusInput = document.getElementById("statusInput");
 const dateInput = document.getElementById("dateInput");
+const timeInput = document.getElementById("timeInput");
+const locationInput = document.getElementById("locationInput");
 const notesInput = document.getElementById("notesInput");
 
 const issuesList = document.getElementById("issuesList");
@@ -43,6 +45,8 @@ bugForm.addEventListener("submit", function (event) {
   const priority = priorityInput.value;
   const status = statusInput.value;
   const date = dateInput.value;
+  const time = timeInput.value;
+  const locationAffected = locationInput.value.trim();
   const notes = notesInput.value.trim();
 
   if (project === "" || title === "") {
@@ -56,6 +60,8 @@ bugForm.addEventListener("submit", function (event) {
     priority: priority,
     status: status,
     date: date,
+    time: time,
+    locationAffected: locationAffected,
     notes: notes
   };
 
@@ -67,6 +73,7 @@ bugForm.addEventListener("submit", function (event) {
   priorityInput.value = "Medium";
   statusInput.value = "Open";
   setTodayDate();
+  setCurrentTime();
 });
 
 searchInput.addEventListener("input", function () {
@@ -166,9 +173,12 @@ function renderIssues() {
   const selectedPriority = filterPriority.value;
 
   const filteredIssues = issues.filter(function (issue) {
+    const locationText = issue.locationAffected || "";
+
     const matchesSearch =
       issue.project.toLowerCase().includes(searchText) ||
-      issue.title.toLowerCase().includes(searchText);
+      issue.title.toLowerCase().includes(searchText) ||
+      locationText.toLowerCase().includes(searchText);
 
     const matchesStatus =
       selectedStatus === "All" || issue.status === selectedStatus;
@@ -235,14 +245,10 @@ function createIssueCard(issue) {
   const meta = document.createElement("div");
   meta.className = "issue-meta";
 
-  const date = document.createElement("p");
-  date.innerHTML = `<strong>Date Found:</strong> ${formatDate(issue.date)}`;
-
-  const notes = document.createElement("p");
-  notes.innerHTML = `<strong>Notes:</strong> ${issue.notes || "No notes added"}`;
-
-  meta.appendChild(date);
-  meta.appendChild(notes);
+  meta.appendChild(createMetaLine("Date Found", formatDate(issue.date)));
+  meta.appendChild(createMetaLine("Time Found", formatTime(issue.time)));
+  meta.appendChild(createMetaLine("Location Affected", issue.locationAffected || "Not added"));
+  meta.appendChild(createMetaLine("Notes", issue.notes || "No notes added"));
 
   const actions = document.createElement("div");
   actions.className = "issue-actions";
@@ -296,6 +302,21 @@ function createIssueCard(issue) {
   return card;
 }
 
+function createMetaLine(label, value) {
+  const line = document.createElement("p");
+
+  const strong = document.createElement("strong");
+  strong.textContent = `${label}: `;
+
+  const span = document.createElement("span");
+  span.textContent = value;
+
+  line.appendChild(strong);
+  line.appendChild(span);
+
+  return line;
+}
+
 function updateStats() {
   totalCount.textContent = issues.length;
 
@@ -342,9 +363,33 @@ function formatDate(dateString) {
   });
 }
 
+function formatTime(timeString) {
+  if (!timeString) {
+    return "Not added";
+  }
+
+  const [hours, minutes] = timeString.split(":");
+  const date = new Date();
+  date.setHours(hours);
+  date.setMinutes(minutes);
+
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit"
+  });
+}
+
 function setTodayDate() {
   const today = new Date().toISOString().split("T")[0];
   dateInput.value = today;
+}
+
+function setCurrentTime() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+
+  timeInput.value = `${hours}:${minutes}`;
 }
 
 const savedTheme = localStorage.getItem("selectedBugFlowTheme") || "clean";
@@ -352,4 +397,5 @@ themeSelect.value = savedTheme;
 applyTheme(savedTheme);
 
 setTodayDate();
+setCurrentTime();
 renderIssues();
