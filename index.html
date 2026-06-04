@@ -9,52 +9,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <section id="loginScreen" class="login-screen">
-    <div class="login-card">
-      <div class="brand login-brand">
-        <div class="brand-icon">⌘</div>
-        <div>
-          <h1>BugFlow OS</h1>
-          <p>Role-Based Service Desk Demo</p>
-        </div>
-      </div>
-
-      <div class="login-copy">
-        <p class="eyebrow">Choose Demo Access</p>
-        <h2>Enter the IT Service Desk</h2>
-        <p>
-          This portfolio demo has three different login experiences: a requester portal,
-          an IT staff dashboard, and an admin command center.
-        </p>
-      </div>
-
-      <div class="role-grid">
-        <button class="role-card" data-login-role="requester" type="button">
-          <span class="role-icon">◎</span>
-          <strong>User Portal</strong>
-          <small>Submit tickets and track your own incidents.</small>
-        </button>
-
-        <button class="role-card" data-login-role="staff" type="button">
-          <span class="role-icon">☷</span>
-          <strong>IT Staff</strong>
-          <small>View the ticket queue, claim work, and resolve issues.</small>
-        </button>
-
-        <button class="role-card admin-role" data-login-role="admin" type="button">
-          <span class="role-icon">⌘</span>
-          <strong>Admin</strong>
-          <small>Manage tickets, personnel, assignments, and workload.</small>
-        </button>
-      </div>
-
-      <p class="demo-note">
-        Demo authentication only. No backend or real passwords are used.
-      </p>
-    </div>
-  </section>
-
-  <div id="app" class="app hidden">
+  <div class="app">
     <aside class="sidebar">
       <div class="brand">
         <div class="brand-icon">⌘</div>
@@ -64,72 +19,58 @@
         </div>
       </div>
 
-      <div class="user-card">
-        <p class="eyebrow">Logged In As</p>
-        <strong id="currentUserName">Demo User</strong>
-        <span id="currentRoleLabel">Role</span>
-        <button id="switchRoleButton" class="ghost-button small-button" type="button">
-          Switch Role
-        </button>
-      </div>
-
       <nav class="nav-menu">
-        <button class="nav-link active" data-view="dashboard" data-roles="staff admin">
+        <button class="nav-link active" data-view="dashboard" type="button">
           <span>▦</span>
           Dashboard
         </button>
 
-        <button class="nav-link" data-view="submit" data-roles="requester staff admin">
+        <button class="nav-link" data-view="submit" type="button">
           <span>＋</span>
           Submit Ticket
         </button>
 
-        <button class="nav-link all-tickets-link" data-view="all" data-roles="staff admin">
+        <button class="nav-link all-tickets-link" data-view="all" type="button">
           <span>👥</span>
           All Tickets
         </button>
 
-        <button class="nav-link" data-view="mine" data-roles="requester staff admin">
+        <div class="visibility-card">
+          <strong>Everyone can view</strong>
+          <span>ALL TICKETS</span>
+          <p>Shared visibility for the full IT team.</p>
+        </div>
+
+        <button class="nav-link" data-view="mine" type="button">
           <span>◉</span>
           My Tickets
         </button>
 
-        <button class="nav-link" data-view="queue" data-roles="staff admin">
+        <button class="nav-link" data-view="queue" type="button">
           <span>☷</span>
           Team Queue
         </button>
 
-        <button class="nav-link" data-view="assigned" data-roles="staff admin">
+        <button class="nav-link" data-view="assigned" type="button">
           <span>◎</span>
           Assigned to Me
         </button>
 
-        <button class="nav-link" data-view="progress" data-roles="staff admin">
+        <button class="nav-link" data-view="progress" type="button">
           <span>↻</span>
           In Progress
         </button>
 
-        <button class="nav-link" data-view="resolved" data-roles="staff admin requester">
+        <button class="nav-link" data-view="resolved" type="button">
           <span>✓</span>
           Resolved
         </button>
 
-        <button class="nav-link" data-view="personnel" data-roles="admin">
-          <span>⚙</span>
-          Personnel
-        </button>
-
-        <button class="nav-link" data-view="knowledge" data-roles="requester staff admin">
+        <button class="nav-link" data-view="knowledge" type="button">
           <span>▤</span>
           Knowledge Base
         </button>
       </nav>
-
-      <div class="visibility-card">
-        <strong id="roleAccessTitle">Role Access</strong>
-        <span id="roleAccessLabel">ACTIVE SESSION</span>
-        <p id="roleAccessText">Your dashboard changes based on the login role.</p>
-      </div>
 
       <div class="console-card">
         <div class="console-header">
@@ -137,10 +78,10 @@
           <span></span>
         </div>
 
-        <p>&gt; Service Desk v3.0.0</p>
-        <p>&gt; Role Gateway: Active</p>
-        <p>&gt; Database: LocalStorage</p>
-        <p>&gt; Ticket Queue: Online</p>
+        <p>&gt; Service Desk v2.4.1</p>
+        <p>&gt; Database: Connected</p>
+        <p>&gt; API Gateway: OK</p>
+        <p>&gt; Ticket Queue: Active</p>
 
         <div class="pulse-line"></div>
       </div>
@@ -149,8 +90,8 @@
     <main class="main-content">
       <header class="topbar">
         <div>
-          <p id="topbarEyebrow" class="eyebrow">Shared IT Ticket Center</p>
-          <h2 id="topbarTitle">IT Service Desk</h2>
+          <p class="eyebrow">Shared IT Ticket Center</p>
+          <h2>IT Service Desk</h2>
         </div>
 
         <div class="search-wrapper">
@@ -169,8 +110,8 @@
         <div class="team-pill">
           <span>👥</span>
           <div>
-            <strong id="teamPillTitle">IT Support Team</strong>
-            <small id="teamPillText">5 members online</small>
+            <strong>IT Support Team</strong>
+            <small>5 members online</small>
           </div>
         </div>
 
@@ -180,11 +121,11 @@
         </div>
       </header>
 
-      <section id="statsSection" class="stats-grid">
+      <section class="stats-grid">
         <article class="stat-card green">
           <p>Total Tickets</p>
           <strong id="totalTickets">0</strong>
-          <span id="totalTicketsLabel">Shared queue</span>
+          <span>Visible queue</span>
         </article>
 
         <article class="stat-card blue">
@@ -218,27 +159,27 @@
         </article>
       </section>
 
-      <section id="ticketsSection" class="dashboard-grid view-section">
+      <section class="dashboard-grid">
         <div class="tickets-panel">
           <div class="panel-header">
             <div>
-              <p id="ticketsEyebrow" class="eyebrow">Shared Visibility</p>
+              <p class="eyebrow">Shared Visibility</p>
               <h3 id="ticketsTitle">All IT Tickets</h3>
-              <p id="ticketsHelperText" class="helper-text">
-                Everyone on the IT side can view the full ticket queue, filter issues,
-                and collaborate with the support team.
+              <p class="helper-text">
+                Everyone in this menu can view the full ticket queue, filter issues,
+                and collaborate with the IT team.
               </p>
             </div>
 
             <div class="panel-actions">
-              <select id="priorityFilter" aria-label="Filter by priority">
+              <select id="priorityFilter">
                 <option value="all">All Priorities</option>
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
               </select>
 
-              <select id="statusFilter" aria-label="Filter by status">
+              <select id="statusFilter">
                 <option value="all">All Statuses</option>
                 <option value="Open">Open</option>
                 <option value="In Progress">In Progress</option>
@@ -286,15 +227,6 @@
 
           <section class="side-panel">
             <div class="side-title">
-              <h3>Team Workload</h3>
-              <span id="workloadCount" class="mini-badge">0</span>
-            </div>
-
-            <div id="workloadList" class="mini-list"></div>
-          </section>
-
-          <section class="side-panel">
-            <div class="side-title">
               <h3>Unassigned Queue</h3>
               <span id="unassignedCount" class="mini-badge">0</span>
             </div>
@@ -307,10 +239,21 @@
               <h3>Quick Actions</h3>
             </div>
 
-            <button class="quick-button" data-quick="outage" type="button">⚠ Report Outage</button>
-            <button class="quick-button" data-quick="access" type="button">🔒 Request Access</button>
-            <button class="quick-button" data-quick="hardware" type="button">💻 Hardware Request</button>
-            <button class="quick-button" data-quick="software" type="button">📦 Software Install</button>
+            <button class="quick-button" data-quick="outage" type="button">
+              ⚠ Report Outage
+            </button>
+
+            <button class="quick-button" data-quick="access" type="button">
+              🔒 Request Access
+            </button>
+
+            <button class="quick-button" data-quick="hardware" type="button">
+              💻 Hardware Request
+            </button>
+
+            <button class="quick-button" data-quick="software" type="button">
+              📦 Software Install
+            </button>
           </section>
 
           <section class="side-panel">
@@ -323,14 +266,13 @@
         </aside>
       </section>
 
-      <section id="submitSection" class="submit-panel view-section hidden">
+      <section id="submitSection" class="submit-panel">
         <div class="submit-header">
           <div>
             <p class="eyebrow">Quick And Easy</p>
             <h3>Submit Ticket</h3>
             <p>
               Once submitted, the ticket appears in the correct queue based on your role.
-              Requesters can track their own ticket, while IT staff and admins can manage the queue.
             </p>
           </div>
 
@@ -418,149 +360,11 @@
           </div>
         </form>
       </section>
-
-      <section id="personnelSection" class="personnel-panel view-section hidden">
-        <div class="submit-header">
-          <div>
-            <p class="eyebrow">Admin Command Center</p>
-            <h3>Manage IT Personnel</h3>
-            <p>
-              Admins can add or remove IT staff, view workload, and assign tickets
-              to the right person.
-            </p>
-          </div>
-        </div>
-
-        <form id="personnelForm" class="personnel-form">
-          <div class="form-group">
-            <label for="personnelNameInput">Full Name *</label>
-            <input
-              id="personnelNameInput"
-              type="text"
-              placeholder="Example: Jordan Miles"
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="personnelRoleInput">Role *</label>
-            <select id="personnelRoleInput" required>
-              <option value="">Select role</option>
-              <option value="IT Technician">IT Technician</option>
-              <option value="Support Engineer">Support Engineer</option>
-              <option value="Help Desk Analyst">Help Desk Analyst</option>
-              <option value="Network Specialist">Network Specialist</option>
-              <option value="Admin">Admin</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="personnelStatusInput">Status *</label>
-            <select id="personnelStatusInput" required>
-              <option value="Online">Online</option>
-              <option value="Busy">Busy</option>
-              <option value="Offline">Offline</option>
-            </select>
-          </div>
-
-          <button class="primary-button" type="submit">
-            Add Personnel
-          </button>
-        </form>
-
-        <div class="personnel-grid">
-          <div class="tickets-panel">
-            <div class="panel-header">
-              <div>
-                <p class="eyebrow">Team Directory</p>
-                <h3>Personnel List</h3>
-                <p class="helper-text">
-                  Removing a person sends their active tickets back to the unassigned queue.
-                </p>
-              </div>
-            </div>
-
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                    <th>Active Tickets</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-
-                <tbody id="personnelTableBody"></tbody>
-              </table>
-            </div>
-          </div>
-
-          <section class="side-panel">
-            <div class="side-title">
-              <h3>Admin Notes</h3>
-            </div>
-
-            <div class="activity-list">
-              <div class="activity-item">
-                <div class="avatar">1</div>
-                <div>
-                  <strong>Assign high-priority tickets first.</strong>
-                  <small>Critical tickets should never stay unassigned.</small>
-                </div>
-              </div>
-
-              <div class="activity-item">
-                <div class="avatar">2</div>
-                <div>
-                  <strong>Balance workload across the team.</strong>
-                  <small>Use the workload panel before assigning new incidents.</small>
-                </div>
-              </div>
-
-              <div class="activity-item">
-                <div class="avatar">3</div>
-                <div>
-                  <strong>Keep personnel list current.</strong>
-                  <small>Remove inactive staff from the demo system.</small>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section id="knowledgeSection" class="knowledge-grid view-section hidden">
-        <article class="knowledge-card">
-          <span>🔒</span>
-          <h3>Account Access</h3>
-          <p>Try password reset, verify MFA, and check whether the account is locked.</p>
-        </article>
-
-        <article class="knowledge-card">
-          <span>🌐</span>
-          <h3>Network / VPN</h3>
-          <p>Restart the VPN client, confirm Wi-Fi, and test another network if possible.</p>
-        </article>
-
-        <article class="knowledge-card">
-          <span>💻</span>
-          <h3>Hardware</h3>
-          <p>Check cables, docks, chargers, and external monitors before escalation.</p>
-        </article>
-
-        <article class="knowledge-card">
-          <span>📦</span>
-          <h3>Software</h3>
-          <p>Include the app name, device type, version, and error message in the ticket.</p>
-        </article>
-      </section>
     </main>
   </div>
 
   <div id="toast" class="toast"></div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
